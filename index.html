@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Флеш-карты | Мои наборы</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Мои наборы карточек</h1>
+        </header>
+
+        <main id="sets-grid" class="sets-grid">
+            <!-- ПРАВКА 1: Добавлен класс glass-effect для единого стиля -->
+            <div class="set-tile create-new-tile glass-effect" id="create-set-btn">
+                <span>+</span>
+            </div>
+            <!-- Сюда будут добавляться плитки наборов -->
+        </main>
+    </div>
+
+    <!-- Модальное окно создания набора -->
+    <div id="create-set-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content glass-effect">
+            <h2>Создать новый набор</h2>
+            <form id="create-set-form">
+                <input type="text" id="new-set-name" placeholder="Название набора" required>
+                <button type="submit" class="btn btn-primary">Создать</button>
+            </form>
+            <button class="modal-close-btn">&times;</button>
+        </div>
+    </div>
+
+    <!-- Модальное окно редактирования набора -->
+    <div id="edit-set-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content glass-effect">
+            <div class="edit-set-header">
+                <input type="text" id="edit-set-name-input" class="edit-set-title-input" placeholder="Название набора">
+            </div>
+            
+            <form id="add-card-form">
+                <textarea id="card-front" placeholder="Слово или термин" rows="1" required></textarea>
+                <textarea id="card-back" placeholder="Перевод или определение" rows="1" required></textarea>
+                <div class="form-actions">
+                    <button type="submit" id="save-card-btn" class="btn btn-primary">Сохранить карточку</button>
+                    <button type="button" id="clear-form-btn" class="btn btn-secondary" style="display: none;">Новая карточка</button>
+                </div>
+            </form>
+
+            <div class="card-list-container">
+                <ul id="card-list">
+                    <!-- Сюда будут добавляться карточки -->
+                </ul>
+            </div>
+            <button class="modal-close-btn">&times;</button>
+        </div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

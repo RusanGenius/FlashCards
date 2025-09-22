@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Флеш-карты | Практика</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="container practice-container">
+        <header class="practice-header">
+            <a href="index.html" class="back-link">На главную</a>
+            <div id="progress-counter" class="progress-counter">0/0</div>
+        </header>
+
+        <main class="practice-area">
+            <div class="card-flipper" id="card-flipper">
+                <div class="flashcard glass-effect" id="flashcard-front"></div>
+                <div class="flashcard glass-effect" id="flashcard-back"></div>
+            </div>
+            <!-- ПРАВКА 3: Панель с основными кнопками перенесена сюда, под карточку -->
+            <div class="card-actions">
+                <button id="btn-unknown" class="btn btn-danger-outline">Не знаю</button>
+                <button id="btn-flip" class="btn btn-secondary">Перевернуть</button>
+                <button id="btn-known" class="btn btn-success-outline">Знаю</button>
+            </div>
+        </main>
+
+        <!-- ПРАВКА 3: В футере осталась только кнопка "Закончить" для позиционирования внизу -->
+        <footer class="practice-controls">
+            <button id="btn-finish" class="btn-finish">Завершить</button>
+        </footer>
+        
+    </div>
+
+    <script type="module" src="js/practice.js"></script>
+</body>
+</html>

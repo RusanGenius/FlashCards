@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Флеш-карты | Результаты</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container results-container">
+        <div class="results-content glass-effect">
+            <h2>Сессия завершена!</h2>
+            <p id="results-summary">Выучено: 0 из 0.</p>
+
+            <!-- ИЗМЕНЕНИЕ 6: HTML-структура для прогресс-бара -->
+            <div class="progress-bar-container">
+                <div id="progress-known" class="progress-bar-segment green"></div>
+                <div id="progress-unknown" class="progress-bar-segment red"></div>
+            </div>
+            
+            <div class="results-actions">
+                <!-- Новый контейнер для верхнего ряда кнопок -->
+                <div class="results-actions-row">
+                    <button id="btn-repeat-difficult" class="btn btn-primary" style="display: none;">Повторить сложные</button>
+                    <button id="btn-restart" class="btn btn-primary">Начать заново</button>
+                </div>
+                <!-- Нижняя кнопка остается как есть -->
+                <button id="btn-home" class="btn btn-primary">Вернуться на главную</button>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="js/results.js"></script>
+</body>
+</html>
