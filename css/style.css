@@ -1,0 +1,498 @@
+/* --- 1. ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ И ЦВЕТА --- */
+/* Здесь хранятся все основные цвета и значения, используемые на сайте.
+   Изменив цвет здесь, вы измените его везде, где он используется. */
+:root {
+    /* --bg-main: основной цвет фона */
+    --bg-main: #080808;
+    /* --text-main: основной цвет текста */
+    --text-main: #C9D1D9;
+    /* --text-secondary: вторичный цвет текста (для подсказок, ссылок) */
+    --text-secondary: #8B949E;
+    /* --glass-bg: цвет фона для "стеклянных" элементов */
+    --glass-bg: rgba(30, 30, 30, 0.3);
+    /* --glass-border: цвет рамки для "стеклянных" элементов */
+    --glass-border: rgba(255, 255, 255, 0.1);
+    /* --accent-success: цвет для обозначения успеха (кнопка "Знаю", прогресс-бар) */
+    --accent-success: #238636;
+    /* --accent-danger: цвет для обозначения неудачи/опасности (кнопка "Не знаю", удаление) */
+    --accent-danger: #DA3633;
+    /* --accent-interactive: цвет для интерактивных элементов (основные кнопки) */
+    --accent-interactive: #454545;
+}
+
+/* --- 2. ОБЩИЕ СТИЛИ ДЛЯ ВСЕГО САЙТА --- */
+/* Стили, которые применяются ко всем элементам на всех страницах. */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #0B0F0B;
+    background: linear-gradient(90deg, rgba(11, 15, 11, 1) 0%, rgba(0, 0, 0, 1) 50%, rgba(11, 15, 11, 1) 100%);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+/* --- 3. СТИЛИЗАЦИЯ ПОЛОСЫ ПРОКРУТКИ (SCROLLBAR) --- */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+/* --- 4. ОСНОВНОЙ КОНТЕЙНЕР И ЗАГОЛОВКИ --- */
+/* Ограничивает ширину контента и центрирует его, задает стили для заголовков. */
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+h1, h2 {
+    font-weight: 600;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+/* --- 5. ЭФФЕКТ "СТЕКЛА" (GLASSMORPHISM) --- */
+/* Этот класс применяется ко всем плиткам, карточкам и модальным окнам. */
+.glass-effect {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 15px;
+    backdrop-filter: blur(7px);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* --- 6. ГЛАВНЫЙ ЭКРАН: СЕТКА НАБОРОВ КАРТОЧЕК --- */
+/* Стили для контейнера с плитками и для самих плиток. */
+.sets-grid {
+    display: flex;
+    flex-wrap: wrap; /* Разрешаем элементам переноситься на новую строку */
+    gap: 25px; /* Зазор между элементами */
+    align-items: center; /* Вертикальное выравнивание */
+    justify-content: center; /* Горизонтальное центрирование всей группы */
+}
+
+/* Стили для плитки существующего набора */
+.set-tile {
+    position: relative;
+    width: 200px; /* Ширина плитки */
+    height: 150px; /* Высота плитки */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    overflow: hidden;
+}
+
+/* Название набора на плитке */
+.set-tile-name {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Эффект при наведении на плитку */
+.set-tile:not(.create-new-tile):hover {
+    transform: scale(1.08);
+    box-shadow: 0 0px 0px 0 rgb(0, 0, 0);
+}
+
+/* Стили для круглой кнопки "Создать набор" (+) */
+.create-new-tile {
+    width: 100px; /* Ширина круглой кнопки */
+    height: 100px; /* Высота круглой кнопки */
+    border-radius: 50%; /* Делает элемент круглым */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-ou;
+}
+.create-new-tile:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0px 0px 0 rgb(0, 0, 0);
+}
+
+/* Стиль самого символа "+" */
+.create-new-tile span {
+    font-size: 50px;
+    color: var(--text-secondary);
+}
+
+/* --- 7. ГЛАВНЫЙ ЭКРАН: ПАНЕЛЬ ДЕЙСТВИЙ НА ПЛИТКЕ --- */
+/* Стили для иконок "Редактировать", "Практика", "Удалить", которые появляются по клику. */
+.set-tile-actions {
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s;
+}
+
+/* Анимация названия при появлении иконок */
+.set-tile.actions-visible .set-tile-name {
+    transform: translateY(-15px);
+}
+
+/* Появление панели действий */
+.set-tile.actions-visible .set-tile-actions {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Стили для иконок (SVG) */
+.action-icon {
+    cursor: pointer;
+    color: white;
+    width: 28px;
+    height: 28px;
+}
+.action-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+}
+
+
+/* --- 8. ОБЩИЕ СТИЛИ КНОПОК --- */
+/* Стили, которые применяются ко всем кнопкам на сайте. */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: 1px solid transparent;
+    font-family: inherit;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    text-align: center;
+}
+/* Основная кнопка (с заливкой) */
+.btn-primary {
+    background-color: var(--accent-interactive);
+    color: white;
+}
+/* Второстепенная кнопка (с рамкой) */
+.btn-secondary {
+    background-color: var(--text-secondary);
+    border-color: var(--glass-border);
+    color: black;
+    font-size: 24px;
+    border-radius: 30px;
+}
+/* Кнопка "Знаю" */
+.btn-success-outline {
+    color: black;
+    background: var(--accent-success);
+    font-size: 24px;
+    border-radius: 30px;
+}
+/* Кнопка "Не знаю" */
+.btn-danger-outline {
+    color: black;
+    background: var(--accent-danger);
+    font-size: 24px;
+    border-radius: 30px;
+}
+
+/* --- 9. МОДАЛЬНЫЕ ОКНА (ОСНОВНЫЕ СТИЛИ) --- */
+/* Затемненный фон и контейнер для модальных окон. */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: flex-start;
+    padding: 5vh 0;
+    z-index: 1000;
+    overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.modal-overlay::-webkit-scrollbar {
+    display: none;
+}
+
+/* Само модальное окно */
+.modal-content {
+    position: relative;
+    padding: 30px;
+    width: 90%;
+    max-width: 700px;
+    margin: auto;
+}
+/* Кнопка "×" для закрытия */
+.modal-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 32px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+/* --- 10. МОДАЛЬНОЕ ОКНО: РЕДАКТИРОВАНИЕ И СОЗДАНИЕ --- */
+/* Стили для элементов внутри модальных окон. */
+
+/* ИЗМЕНЕНИЕ: Добавлен блок для центрирования кнопки "Создать" */
+#create-set-form {
+    text-align: center;
+}
+
+.edit-set-header {
+    margin-bottom: 20px;
+}
+/* Поле для ввода названия набора */
+.edit-set-title-input {
+    font-size: 24px;
+    font-weight: 600;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--glass-border);
+    color: var(--text-main);
+    width: 100%;
+    padding: 5px 0;
+}
+.edit-set-title-input:focus {
+    outline: none;
+    border-bottom-color: var(--accent-interactive);
+}
+
+/* Общие стили для полей ввода и текстовых областей */
+input[type="text"], textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    background: var(--bg-main);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    color: var(--text-main);
+    font-family: inherit;
+    resize: none;
+    line-height: 1.5;
+}
+textarea {
+    overflow: hidden;
+    min-height: calc(1.5em + 26px);
+}
+/* Контейнер для кнопки "Сохранить карточку" */
+.form-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+.form-actions button {
+    flex-grow: 0;
+}
+
+/* Контейнер для списка карточек */
+.card-list-container {
+    max-height: 350px;
+    overflow-y: auto;
+    margin-top: 30px;
+}
+#card-list {
+    list-style: none;
+}
+/* Элемент списка (одна карточка) */
+.card-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border-bottom: 1px solid var(--glass-border);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.card-list-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+/* Текст внутри элемента списка */
+.card-list-item span {
+    flex: 1;
+    padding-right: 10px;
+    word-break: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+/* Кнопка удаления карточки в списке */
+.delete-card-btn {
+    background: none;
+    border: none;
+    color: var(--accent-danger);
+    font-size: 20px;
+    cursor: pointer;
+    padding-left: 10px;
+}
+
+/* --- 11. СТРАНИЦА ПРАКТИКИ --- */
+/* Основная разметка и контейнеры на странице практики. */
+.practice-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 80px);
+}
+.practice-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.back-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+}
+.practice-area {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+}
+
+/* Стили для переворачивающейся флеш-карты */
+.card-flipper {
+    width: 80%;
+    max-width: 500px;
+    height: 300px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+.card-flipper.is-flipped {
+    transform: rotateY(180deg);
+}
+/* Общие стили для передней и задней стороны карточки */
+.flashcard {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    /* Внутренние отступы, чтобы текст не прилипал к краям */
+    padding: 30px;
+    text-align: center;
+    white-space: pre-wrap;
+    overflow-y: auto;
+    word-wrap: break-word;
+}
+/* Задняя сторона карточки (перевернута изначально) */
+#flashcard-back {
+    transform: rotateY(180deg);
+}
+
+/* Контейнер для кнопок "Знаю", "Не знаю", "Перевернуть" */
+.card-actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+/* Контейнер для кнопки "Закончить" */
+.practice-controls {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-top: 20px;
+}
+.btn-finish {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 24px;
+}
+
+/* --- 12. СТРАНИЦА РЕЗУЛЬТАТОВ --- */
+/* Стили для элементов на странице с результатами сессии. */
+.results-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.results-content {
+    padding: 40px;
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+}
+.results-content p {
+    font-size: 18px;
+    margin: 20px 0;
+}
+.results-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+/* Новый блок для ряда кнопок на странице результатов */
+.results-actions-row {
+    display: flex; /* Выстраивает кнопки в ряд */
+    gap: 15px; /* Расстояние между кнопками */
+}
+
+/* Делаем кнопки в ряду одинаковой ширины */
+.results-actions-row .btn {
+    flex: 1; /* Каждая кнопка занимает равное пространство */
+}
+
+/* Стили для прогресс-бара */
+.progress-bar-container {
+    display: flex;
+    width: 100%;
+    height: 12px;
+    background-color: var(--glass-bg);
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 30px 0;
+}
+.progress-bar-segment {
+    height: 100%;
+    width: 0;
+    transition: width 1s ease-in-out;
+}
+.progress-bar-segment.green {
+    background-color: var(--accent-success);
+}
+.progress-bar-segment.red {
+    background-color: var(--accent-danger);
+}
