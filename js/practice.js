@@ -1,6 +1,11 @@
 import * as storage from './storage.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('flashcards-theme');
+    if (savedTheme === 'light') {
+        document.body.classList.add('light-theme');
+    }
+
     const progressCounter = document.getElementById('progress-counter');
     const cardFlipper = document.getElementById('card-flipper');
     const cardFront = document.getElementById('flashcard-front');
@@ -24,6 +29,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const j = Math.floor(Math.random() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];
         }
+        return array;
+    }
+
+    function getCardsForSession(set) {
+        if (practiceType === 'difficult') {
+            const sessionData = JSON.parse(sessionStorage.getItem('lastSession'));
+            if (sessionData?.unknown?.length > 0) {
+                const difficultCardIds = new Set(sessionData.unknown);
+                return set.cards.filter(card => difficultCardIds.has(card.id));
+            }
+            return [];
+        }
+        return [...set.cards];
     }
 
     function loadCards() {
@@ -34,17 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        if (practiceType === 'difficult') {
-            const sessionData = JSON.parse(sessionStorage.getItem('lastSession'));
-            if (sessionData && sessionData.unknown) {
-                const difficultCardIds = sessionData.unknown;
-                currentCards = set.cards.filter(card => difficultCardIds.includes(card.id));
-            } else {
-                currentCards = []; // Нет сложных карточек для повторения
-            }
-        } else {
-            currentCards = [...set.cards];
-        }
+        currentCards = getCardsForSession(set);
 
         if (currentCards.length === 0) {
             alert("В этом наборе нет карточек для практики.");
@@ -72,7 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const card = currentCards[currentIndex];
         cardFlipper.classList.remove('is-flipped');
 
-        // Небольшая задержка для анимации переворота
         setTimeout(() => {
             cardFront.textContent = card.front;
             cardBack.textContent = card.back;
@@ -82,11 +89,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function nextCard(isKnown) {
-        const card = currentCards[currentIndex];
+        const cardId = currentCards[currentIndex].id;
         if (isKnown) {
-            knownCardsIds.push(card.id);
+            knownCardsIds.push(cardId);
         } else {
-            unknownCardsIds.push(card.id);
+            unknownCardsIds.push(cardId);
         }
         currentIndex++;
         showCard();
@@ -94,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function endSession() {
         const sessionData = {
-            setId: setId,
+            setId,
             known: knownCardsIds,
             unknown: unknownCardsIds,
             total: currentCards.length
@@ -103,13 +110,11 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = 'results.html';
     }
 
-    // --- Обработчики событий ---
     cardFlipper.addEventListener('click', () => cardFlipper.classList.toggle('is-flipped'));
     btnFlip.addEventListener('click', () => cardFlipper.classList.toggle('is-flipped'));
     btnKnown.addEventListener('click', () => nextCard(true));
     btnUnknown.addEventListener('click', () => nextCard(false));
     btnFinish.addEventListener('click', endSession);
     
-    // --- Инициализация ---
     loadCards();
 });
