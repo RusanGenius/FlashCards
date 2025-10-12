@@ -1,27 +1,16 @@
-/* --- 1. ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ И ЦВЕТА --- */
-/* Здесь хранятся все основные цвета и значения, используемые на сайте.
-   Изменив цвет здесь, вы измените его везде, где он используется. */
+/* --- 1. Variables & Colors --- */
 :root {
-    /* --bg-main: основной цвет фона */
     --bg-main: #080808;
-    /* --text-main: основной цвет текста */
     --text-main: #C9D1D9;
-    /* --text-secondary: вторичный цвет текста (для подсказок, ссылок) */
     --text-secondary: #8B949E;
-    /* --glass-bg: цвет фона для "стеклянных" элементов */
-    --glass-bg: rgba(30, 30, 30, 0.3);
-    /* --glass-border: цвет рамки для "стеклянных" элементов */
+    --glass-bg: rgba(30, 30, 30, 0.5);
     --glass-border: rgba(255, 255, 255, 0.1);
-    /* --accent-success: цвет для обозначения успеха (кнопка "Знаю", прогресс-бар) */
     --accent-success: #238636;
-    /* --accent-danger: цвет для обозначения неудачи/опасности (кнопка "Не знаю", удаление) */
     --accent-danger: #DA3633;
-    /* --accent-interactive: цвет для интерактивных элементов (основные кнопки) */
-    --accent-interactive: #454545;
+    --accent-interactive: #303030;
 }
 
-/* --- 2. ОБЩИЕ СТИЛИ ДЛЯ ВСЕГО САЙТА --- */
-/* Стили, которые применяются ко всем элементам на всех страницах. */
+/* --- 2. General Styles --- */
 * {
     margin: 0;
     padding: 0;
@@ -29,15 +18,14 @@
 }
 
 body {
-    background: #0B0F0B;
-    background: linear-gradient(90deg, rgba(11, 15, 11, 1) 0%, rgba(0, 0, 0, 1) 50%, rgba(11, 15, 11, 1) 100%);
+    background: var(--bg-main);
     color: var(--text-main);
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     line-height: 1.5;
 }
 
-/* --- 3. СТИЛИЗАЦИЯ ПОЛОСЫ ПРОКРУТКИ (SCROLLBAR) --- */
+/* --- 3. Scrollbar --- */
 ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -53,8 +41,7 @@ body {
     background: rgba(255, 255, 255, 0.4);
 }
 
-/* --- 4. ОСНОВНОЙ КОНТЕЙНЕР И ЗАГОЛОВКИ --- */
-/* Ограничивает ширину контента и центрирует его, задает стили для заголовков. */
+/* --- 4. Container & Headings --- */
 .container {
     max-width: 960px;
     margin: 0 auto;
@@ -63,35 +50,44 @@ body {
 
 h1, h2 {
     font-weight: 600;
-    margin-bottom: 40px;
+    margin-bottom: 7px;
     text-align: center;
 }
 
-/* --- 5. ЭФФЕКТ "СТЕКЛА" (GLASSMORPHISM) --- */
-/* Этот класс применяется ко всем плиткам, карточкам и модальным окнам. */
+.main-header {
+    padding-top: 40px;
+}
+
+.subtitle {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 35px;
+}
+
+/* --- 5. Glassmorphism --- */
 .glass-effect {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
     border-radius: 15px;
     backdrop-filter: blur(7px);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    box-shadow: 0 0 32px 0 rgba(0, 0, 0, 0.37);
 }
 
-/* --- 6. ГЛАВНЫЙ ЭКРАН: СЕТКА НАБОРОВ КАРТОЧЕК --- */
-/* Стили для контейнера с плитками и для самих плиток. */
+/* --- 6. Main Screen: Sets Grid --- */
 .sets-grid {
     display: flex;
-    flex-wrap: wrap; /* Разрешаем элементам переноситься на новую строку */
-    gap: 25px; /* Зазор между элементами */
-    align-items: center; /* Вертикальное выравнивание */
-    justify-content: center; /* Горизонтальное центрирование всей группы */
+    flex-wrap: wrap;
+    gap: 25px;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Стили для плитки существующего набора */
 .set-tile {
     position: relative;
-    width: 200px; /* Ширина плитки */
-    height: 150px; /* Высота плитки */
+    width: 200px;
+    height: 150px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -103,7 +99,6 @@ h1, h2 {
     overflow: hidden;
 }
 
-/* Название набора на плитке */
 .set-tile-name {
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -114,32 +109,12 @@ h1, h2 {
     transition: transform 0.2s ease-in-out;
 }
 
-/* Эффект при наведении на плитку */
-.set-tile:not(.create-new-tile):hover {
-    transform: scale(1.08);
-    box-shadow: 0 0px 0px 0 rgb(0, 0, 0);
+.set-tile:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0px 15px -10px rgb(0, 0, 0);
 }
 
-/* Стили для круглой кнопки "Создать набор" (+) */
-.create-new-tile {
-    width: 100px; /* Ширина круглой кнопки */
-    height: 100px; /* Высота круглой кнопки */
-    border-radius: 50%; /* Делает элемент круглым */
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-ou;
-}
-.create-new-tile:hover {
-    transform: scale(1.08);
-    box-shadow: 0 0px 0px 0 rgb(0, 0, 0);
-}
-
-/* Стиль самого символа "+" */
-.create-new-tile span {
-    font-size: 50px;
-    color: var(--text-secondary);
-}
-
-/* --- 7. ГЛАВНЫЙ ЭКРАН: ПАНЕЛЬ ДЕЙСТВИЙ НА ПЛИТКЕ --- */
-/* Стили для иконок "Редактировать", "Практика", "Удалить", которые появляются по клику. */
+/* --- 7. Main Screen: Tile Actions --- */
 .set-tile-actions {
     position: absolute;
     bottom: 15px;
@@ -153,18 +128,15 @@ h1, h2 {
     transition: opacity 0.2s, visibility 0.2s;
 }
 
-/* Анимация названия при появлении иконок */
 .set-tile.actions-visible .set-tile-name {
     transform: translateY(-15px);
 }
 
-/* Появление панели действий */
 .set-tile.actions-visible .set-tile-actions {
     opacity: 1;
     visibility: visible;
 }
 
-/* Стили для иконок (SVG) */
 .action-icon {
     cursor: pointer;
     color: white;
@@ -177,9 +149,7 @@ h1, h2 {
     fill: currentColor;
 }
 
-
-/* --- 8. ОБЩИЕ СТИЛИ КНОПОК --- */
-/* Стили, которые применяются ко всем кнопкам на сайте. */
+/* --- 8. Buttons --- */
 .btn {
     display: inline-block;
     padding: 10px 20px;
@@ -191,12 +161,10 @@ h1, h2 {
     transition: background-color 0.2s, color 0.2s, border-color 0.2s;
     text-align: center;
 }
-/* Основная кнопка (с заливкой) */
 .btn-primary {
     background-color: var(--accent-interactive);
-    color: white;
+    color: #dddddd;
 }
-/* Второстепенная кнопка (с рамкой) */
 .btn-secondary {
     background-color: var(--text-secondary);
     border-color: var(--glass-border);
@@ -204,14 +172,12 @@ h1, h2 {
     font-size: 24px;
     border-radius: 30px;
 }
-/* Кнопка "Знаю" */
 .btn-success-outline {
     color: black;
     background: var(--accent-success);
     font-size: 24px;
     border-radius: 30px;
 }
-/* Кнопка "Не знаю" */
 .btn-danger-outline {
     color: black;
     background: var(--accent-danger);
@@ -219,8 +185,7 @@ h1, h2 {
     border-radius: 30px;
 }
 
-/* --- 9. МОДАЛЬНЫЕ ОКНА (ОСНОВНЫЕ СТИЛИ) --- */
-/* Затемненный фон и контейнер для модальных окон. */
+/* --- 9. Modals (Base) --- */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -240,7 +205,6 @@ h1, h2 {
     display: none;
 }
 
-/* Само модальное окно */
 .modal-content {
     position: relative;
     padding: 30px;
@@ -248,7 +212,6 @@ h1, h2 {
     max-width: 700px;
     margin: auto;
 }
-/* Кнопка "×" для закрытия */
 .modal-close-btn {
     position: absolute;
     top: 10px;
@@ -261,10 +224,7 @@ h1, h2 {
     line-height: 1;
 }
 
-/* --- 10. МОДАЛЬНОЕ ОКНО: РЕДАКТИРОВАНИЕ И СОЗДАНИЕ --- */
-/* Стили для элементов внутри модальных окон. */
-
-/* ИЗМЕНЕНИЕ: Добавлен блок для центрирования кнопки "Создать" */
+/* --- 10. Modals: Create & Edit --- */
 #create-set-form {
     text-align: center;
 }
@@ -272,7 +232,6 @@ h1, h2 {
 .edit-set-header {
     margin-bottom: 20px;
 }
-/* Поле для ввода названия набора */
 .edit-set-title-input {
     font-size: 24px;
     font-weight: 600;
@@ -288,14 +247,13 @@ h1, h2 {
     border-bottom-color: var(--accent-interactive);
 }
 
-/* Общие стили для полей ввода и текстовых областей */
 input[type="text"], textarea {
     width: 100%;
     padding: 12px;
     margin-bottom: 15px;
     background: var(--bg-main);
     border: 1px solid var(--glass-border);
-    border-radius: 8px;
+    border-radius: 15px;
     color: var(--text-main);
     font-family: inherit;
     resize: none;
@@ -305,7 +263,6 @@ textarea {
     overflow: hidden;
     min-height: calc(1.5em + 26px);
 }
-/* Контейнер для кнопки "Сохранить карточку" */
 .form-actions {
     display: flex;
     justify-content: center;
@@ -315,7 +272,6 @@ textarea {
     flex-grow: 0;
 }
 
-/* Контейнер для списка карточек */
 .card-list-container {
     max-height: 350px;
     overflow-y: auto;
@@ -324,7 +280,6 @@ textarea {
 #card-list {
     list-style: none;
 }
-/* Элемент списка (одна карточка) */
 .card-list-item {
     display: flex;
     justify-content: space-between;
@@ -337,7 +292,6 @@ textarea {
 .card-list-item:hover {
     background-color: rgba(255, 255, 255, 0.05);
 }
-/* Текст внутри элемента списка */
 .card-list-item span {
     flex: 1;
     padding-right: 10px;
@@ -347,7 +301,6 @@ textarea {
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
-/* Кнопка удаления карточки в списке */
 .delete-card-btn {
     background: none;
     border: none;
@@ -357,8 +310,7 @@ textarea {
     padding-left: 10px;
 }
 
-/* --- 11. СТРАНИЦА ПРАКТИКИ --- */
-/* Основная разметка и контейнеры на странице практики. */
+/* --- 11. Practice Page --- */
 .practice-container {
     display: flex;
     flex-direction: column;
@@ -383,7 +335,6 @@ textarea {
     perspective: 1000px;
 }
 
-/* Стили для переворачивающейся флеш-карты */
 .card-flipper {
     width: 80%;
     max-width: 500px;
@@ -396,7 +347,6 @@ textarea {
 .card-flipper.is-flipped {
     transform: rotateY(180deg);
 }
-/* Общие стили для передней и задней стороны карточки */
 .flashcard {
     position: absolute;
     width: 100%;
@@ -406,26 +356,22 @@ textarea {
     justify-content: center;
     align-items: center;
     font-size: 24px;
-    /* Внутренние отступы, чтобы текст не прилипал к краям */
     padding: 30px;
     text-align: center;
     white-space: pre-wrap;
     overflow-y: auto;
     word-wrap: break-word;
 }
-/* Задняя сторона карточки (перевернута изначально) */
 #flashcard-back {
     transform: rotateY(180deg);
 }
 
-/* Контейнер для кнопок "Знаю", "Не знаю", "Перевернуть" */
 .card-actions {
     display: flex;
     justify-content: center;
     gap: 20px;
     margin-top: 30px;
 }
-/* Контейнер для кнопки "Закончить" */
 .practice-controls {
     display: flex;
     justify-content: center;
@@ -437,15 +383,15 @@ textarea {
     border: none;
     color: var(--text-secondary);
     font-size: 24px;
+    cursor: pointer;
 }
 
-/* --- 12. СТРАНИЦА РЕЗУЛЬТАТОВ --- */
-/* Стили для элементов на странице с результатами сессии. */
+/* --- 12. Results Page --- */
 .results-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
 }
 .results-content {
     padding: 40px;
@@ -464,18 +410,15 @@ textarea {
     margin-top: 30px;
 }
 
-/* Новый блок для ряда кнопок на странице результатов */
 .results-actions-row {
-    display: flex; /* Выстраивает кнопки в ряд */
-    gap: 15px; /* Расстояние между кнопками */
+    display: flex;
+    gap: 15px;
 }
 
-/* Делаем кнопки в ряду одинаковой ширины */
 .results-actions-row .btn {
-    flex: 1; /* Каждая кнопка занимает равное пространство */
+    flex: 1;
 }
 
-/* Стили для прогресс-бара */
 .progress-bar-container {
     display: flex;
     width: 100%;
@@ -495,4 +438,158 @@ textarea {
 }
 .progress-bar-segment.red {
     background-color: var(--accent-danger);
+}
+
+/* --- 13. Main Screen Layout --- */
+.main-layout {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-controls {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 0 20px 20px 20px;
+}
+
+.control-btn {
+    width: 70px;
+    height: 70px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+    color: var(--text-main);
+    padding: 0;
+}
+.control-btn svg {
+    width: 32px;
+    height: 32px;
+    fill: currentColor;
+}
+
+/* --- 14. Theme Toggle (Light/Dark) --- */
+body.light-theme {
+    --bg-main: rgba(255, 255, 255, 0.5);
+    --text-main: #1C1E21;
+    --text-secondary: #65676B;
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(0, 0, 0, 0.2);
+    --accent-interactive: #E4E6EB;
+}
+body.light-theme .btn-primary {
+    color: var(--text-main);
+}
+body.light-theme .action-icon {
+    color: var(--text-main);
+}
+.icon-moon,
+body.light-theme .icon-sun {
+    display: none;
+}
+body.light-theme .icon-moon {
+    display: block;
+}
+
+/* --- 15. View Toggle (Grid/List) --- */
+#layout-toggle-btn .icon-grid {
+    display: none;
+}
+#layout-toggle-btn .icon-list {
+    display: block;
+}
+#layout-toggle-btn.is-list-view .icon-grid {
+    display: block;
+}
+#layout-toggle-btn.is-list-view .icon-list {
+    display: none;
+}
+
+.sets-grid.list-view {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    padding: 0 20px;
+}
+.sets-grid.list-view .set-tile {
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 15px 25px;
+}
+.sets-grid.list-view .set-tile-name {
+    text-align: left;
+}
+.sets-grid.list-view .set-tile-actions {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    gap: 20px;
+}
+.sets-grid.list-view .set-tile.actions-visible .set-tile-name {
+    transform: none;
+}
+
+/* --- 16. Desktop Responsiveness --- */
+@media (min-width: 768px) {
+    .main-layout {
+        flex-direction: row;
+        gap: 40px;
+        padding: 0 20px;
+    }
+    .main-controls {
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 0;
+        padding-top: 105px;
+        gap: 15px;
+    }
+    .main-header h1 {
+        text-align: center;
+        padding-left: 0;
+    }
+    .sets-grid {
+        flex: 1;
+        justify-content: center;
+    }
+    .sets-grid.list-view {
+        align-items: center;
+        padding: 0;
+    }
+    .sets-grid.list-view .set-tile {
+        max-width: 1050px;
+    }
+}
+
+/* --- 17. Light Theme Color Overrides --- */
+body.light-theme {
+    --light-accent-success: #34C759;
+    --light-accent-danger: #FF3B30;
+    --light-accent-secondary: #E5E5EA;
+}
+
+body.light-theme .btn-success-outline {
+    background: var(--light-accent-success);
+    color: black;
+}
+body.light-theme .btn-danger-outline {
+    background: var(--light-accent-danger);
+    color: black;
+}
+body.light-theme .btn-secondary {
+    background: var(--light-accent-secondary);
+    color: var(--text-main);
+}
+body.light-theme .progress-bar-segment.green {
+    background-color: var(--light-accent-success);
+}
+body.light-theme .progress-bar-segment.red {
+    background-color: var(--light-accent-danger);
 }
