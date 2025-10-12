@@ -1,61 +1,49 @@
 const STORAGE_KEY = 'flashcards_app_data';
 
-// --- ИЗМЕНЕНИЕ: Функция для создания наборов по умолчанию ---
+const _generateId = () => Date.now();
+
 function _createDefaultData() {
-    const now = Date.now();
     return {
         sets: [
             {
-                id: now,
+                id: _generateId(),
                 name: "Ключевые даты в истории России",
                 cards: [
-                    { id: now + 1, front: '862 год', back: 'Призвание варягов на Русь' },
-                    { id: now + 2, front: '988 год', back: 'Крещение Руси' },
-                    { id: now + 3, front: '1242 год', back: 'Ледовое побоище' },
-                    { id: now + 4, front: '1480 год', back: 'Стояние на реке Угре, конец ордынского ига' },
-                    { id: now + 5, front: '1613 год', back: 'Начало правления династии Романовых' },
-                    { id: now + 6, front: '1703 год', back: 'Основание Санкт-Петербурга' },
-                    { id: now + 7, front: '1812 год', back: 'Бородинское сражение' },
-                    { id: now + 8, front: '1861 год', back: 'Отмена крепостного права' },
-                    { id: now + 9, front: '1917 год', back: 'Октябрьская революция' },
-                    { id: now + 10, front: '1945 год', back: 'Окончание Великой Отечественной войны' }
+                    { id: _generateId() + 1, front: 'Крещение Руси', back: '988 год' },
+                    { id: _generateId() + 2, front: 'Ледовое побоище', back: '1242 год' },
+                    { id: _generateId() + 3, front: 'Стояние на реке Угре', back: '1480 год' },
+                    { id: _generateId() + 4, front: 'Основание Санкт-Петербурга', back: '1703 год' },
+                    { id: _generateId() + 5, front: 'Бородинское сражение', back: '1812 год' },
+                    { id: _generateId() + 6, front: 'Отмена крепостного права', back: '1861 год' },
+                    { id: _generateId() + 7, front: 'Октябрьская революция', back: '1917 год' },
+                    { id: _generateId() + 8, front: 'Окончание ВОВ', back: '1945 год' }
                 ]
             },
             {
-                id: now + 11,
+                id: _generateId() + 10,
                 name: "Английские слова",
                 cards: [
-                    { id: now + 12, front: 'Cat', back: 'Кошка' },
-                    { id: now + 13, front: 'Big pencil', back: 'Большой карандаш' },
-                    { id: now + 14, front: 'Experience', back: 'Опыт' },
-                    { id: now + 15, front: 'Inevitable', back: 'Неизбежный' },
-                    { id: now + 16, front: 'Curious', back: 'Любопытный' },
-                    { id: now + 17, front: 'Admire', back: 'Восхищаться' },
-                    { id: now + 18, front: 'To distinguish', back: 'Различать, отличать' },
-                    { id: now + 19, front: 'To comprehend', back: 'Понимать, постигать' },
-                    { id: now + 20, front: 'To persuade', back: 'Убеждать' },
-                    { id: now + 21, front: 'To acknowledge', back: 'Признавать, подтверждать' },
-                    { id: now + 22, front: 'Abundant', back: 'Обильный, избыточный' },
-                    { id: now + 23, front: 'To anticipate', back: 'Предвидеть, ожидать' },
-                    { id: now + 24, front: 'Admit', back: 'Признавать' },
-                    { id: now + 25, front: 'Subtle', back: 'Тонкий, неуловимый, нежный' },
-                    { id: now + 26, front: 'Diligent', back: 'Старательный, прилежный' }
+                    { id: _generateId() + 11, front: 'Experience', back: 'Опыт' },
+                    { id: _generateId() + 12, front: 'Inevitable', back: 'Неизбежный' },
+                    { id: _generateId() + 13, front: 'Curious', back: 'Любопытный' },
+                    { id: _generateId() + 14, front: 'To distinguish', back: 'Различать, отличать' },
+                    { id: _generateId() + 15, front: 'To persuade', back: 'Убеждать' },
+                    { id: _generateId() + 16, front: 'To acknowledge', back: 'Признавать, подтверждать' },
+                    { id: _generateId() + 17, front: 'Subtle', back: 'Тонкий, неуловимый' },
+                    { id: _generateId() + 18, front: 'Diligent', back: 'Старательный, прилежный' }
                 ]
             }
         ]
     };
 }
 
-// --- ИЗМЕНЕНИЕ: Основная функция получения данных теперь создает контент для новых пользователей ---
 function _getData() {
     const data = localStorage.getItem(STORAGE_KEY);
-    // Если данных нет, создаем их по умолчанию и сохраняем
     if (!data) {
         const defaultData = _createDefaultData();
         _saveData(defaultData);
         return defaultData;
     }
-    // Если данные есть, просто возвращаем их
     return JSON.parse(data);
 }
 
@@ -74,7 +62,7 @@ export function getSetById(setId) {
 export function addSet(name) {
     const data = _getData();
     const newSet = {
-        id: Date.now(),
+        id: _generateId(),
         name: name,
         cards: []
     };
@@ -103,9 +91,8 @@ export function addCardToSet(setId, cardData) {
     const set = data.sets.find(s => s.id === setId);
     if (set) {
         const newCard = {
-            id: Date.now(),
-            front: cardData.front,
-            back: cardData.back
+            id: _generateId(),
+            ...cardData
         };
         set.cards.push(newCard);
         _saveData(data);
@@ -128,8 +115,7 @@ export function updateCardInSet(setId, cardId, newCardData) {
     if (set) {
         const cardIndex = set.cards.findIndex(c => c.id === cardId);
         if (cardIndex !== -1) {
-            set.cards[cardIndex].front = newCardData.front;
-            set.cards[cardIndex].back = newCardData.back;
+            set.cards[cardIndex] = { ...set.cards[cardIndex], ...newCardData };
             _saveData(data);
         }
     }
