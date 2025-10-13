@@ -3,11 +3,12 @@
     --bg-main: #080808;
     --text-main: #C9D1D9;
     --text-secondary: #8B949E;
-    --glass-bg: rgba(30, 30, 30, 0.5);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --accent-success: #238636;
-    --accent-danger: #DA3633;
+    --white: #FFFFFF;
+    --accent-success: #50c42d;
+    --accent-danger: #d61515;
     --accent-interactive: #303030;
+    --glass-bg: rgba(10, 10, 10, 0.5); 
+    --glass-border: rgba(255, 255, 255, 0.1);
 }
 
 /* --- 2. General Styles --- */
@@ -18,11 +19,34 @@
 }
 
 body {
-    background: var(--bg-main);
+    background-color: #000;
     color: var(--text-main);
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     line-height: 1.5;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    background: white;
+    filter: url(#noise);
+
+    mask-image: 
+        radial-gradient(circle at 50% 100%, white, transparent 50%),
+        radial-gradient(circle at 90% 10%, white, transparent 35%),
+        radial-gradient(circle at 15% 40%, white, transparent 30%);
+    -webkit-mask-image: 
+        radial-gradient(circle at 30% 100%, rgba(255, 255, 255, 0.6), transparent 45%),
+        radial-gradient(circle at 70% 40%, rgba(255, 255, 255, 0.4), transparent 25%),
+        radial-gradient(circle at 55% 60%, rgba(255, 255, 255, 0.2), transparent 40%);
 }
 
 /* --- 3. Scrollbar --- */
@@ -99,6 +123,7 @@ h1, h2 {
     overflow: hidden;
 }
 
+/* Truncate text to 3 lines */
 .set-tile-name {
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -157,30 +182,34 @@ h1, h2 {
     border: 1px solid transparent;
     font-family: inherit;
     font-size: 20px;
+    font-weight: 600;
     cursor: pointer;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s;
     text-align: center;
 }
+
 .btn-primary {
-    background-color: var(--accent-interactive);
-    color: #dddddd;
+    background-color: #aaa;
+    color: black;
 }
+
 .btn-secondary {
     background-color: var(--text-secondary);
     border-color: var(--glass-border);
-    color: black;
-    font-size: 24px;
-    border-radius: 30px;
+    color: var(--bg-main);
 }
+
 .btn-success-outline {
-    color: black;
     background: var(--accent-success);
-    font-size: 24px;
-    border-radius: 30px;
+    color: var(--bg-main);
 }
+
 .btn-danger-outline {
-    color: black;
     background: var(--accent-danger);
+    color: var(--bg-main);
+}
+
+.btn.large {
     font-size: 24px;
     border-radius: 30px;
 }
@@ -292,6 +321,7 @@ textarea {
 .card-list-item:hover {
     background-color: rgba(255, 255, 255, 0.05);
 }
+/* Truncate text to 3 lines */
 .card-list-item span {
     flex: 1;
     padding-right: 10px;
@@ -304,7 +334,7 @@ textarea {
 .delete-card-btn {
     background: none;
     border: none;
-    color: var(--accent-danger);
+    color: white;
     font-size: 20px;
     cursor: pointer;
     padding-left: 10px;
@@ -354,7 +384,7 @@ textarea {
     backface-visibility: hidden;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     font-size: 24px;
     padding: 30px;
     text-align: center;
@@ -474,20 +504,48 @@ textarea {
 }
 
 /* --- 14. Theme Toggle (Light/Dark) --- */
+
+/* Define light theme variables and override styles */
 body.light-theme {
     --bg-main: rgba(255, 255, 255, 0.5);
     --text-main: #1C1E21;
     --text-secondary: #65676B;
-    --glass-bg: rgba(255, 255, 255, 0.7);
-    --glass-border: rgba(0, 0, 0, 0.2);
-    --accent-interactive: #E4E6EB;
+    --glass-bg: rgba(255, 255, 255, 0.6); 
+    --glass-border: rgba(0, 0, 0, 0.1);
+    --accent-interactive: #f0f2f5;
+    --accent-success: #34C759;
+    --accent-danger: #FF3630;
+    background-color: var(--bg-main);
 }
+
+body.light-theme::before {
+    display: none;
+}
+
+/* Light theme specific component overrides */
 body.light-theme .btn-primary {
+    background-color: #dedede;
     color: var(--text-main);
 }
+
+body.light-theme .btn-secondary {
+    color: var(--text-main);
+}
+
+body.light-theme .btn-success-outline,
+body.light-theme .btn-danger-outline {
+    color: black; 
+}
+
 body.light-theme .action-icon {
     color: var(--text-main);
 }
+
+body.light-theme .delete-card-btn {
+    color: black;
+}
+
+/* Theme icon visibility toggle */
 .icon-moon,
 body.light-theme .icon-sun {
     display: none;
@@ -567,30 +625,4 @@ body.light-theme .icon-moon {
     .sets-grid.list-view .set-tile {
         max-width: 1050px;
     }
-}
-
-/* --- 17. Light Theme Color Overrides --- */
-body.light-theme {
-    --light-accent-success: #34C759;
-    --light-accent-danger: #FF3B30;
-    --light-accent-secondary: #E5E5EA;
-}
-
-body.light-theme .btn-success-outline {
-    background: var(--light-accent-success);
-    color: black;
-}
-body.light-theme .btn-danger-outline {
-    background: var(--light-accent-danger);
-    color: black;
-}
-body.light-theme .btn-secondary {
-    background: var(--light-accent-secondary);
-    color: var(--text-main);
-}
-body.light-theme .progress-bar-segment.green {
-    background-color: var(--light-accent-success);
-}
-body.light-theme .progress-bar-segment.red {
-    background-color: var(--light-accent-danger);
 }
