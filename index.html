@@ -4,17 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flash Cards</title>
+    <link rel="icon" type="image/svg+xml" href="icon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <svg style="display: none;">
+        <filter id="noise">
+            <feTurbulence 
+                type="fractalNoise" 
+                baseFrequency="0.8" 
+                numOctaves="4" 
+                stitchTiles="stitch"
+            />
+            <feColorMatrix type="saturate" values="0"/>
+        </filter>
+    </svg>
+
     <header class="main-header">
         <h1>Flash Cards</h1>
         <p class="subtitle">Developed by Rusan</p>
     </header>
-</svg>
+
     <div class="main-layout">
         <aside class="main-controls">
             <button id="create-set-btn" class="control-btn glass-effect" title="Создать новый набор">
@@ -48,11 +61,11 @@
                 <input type="text" id="edit-set-name-input" class="edit-set-title-input" placeholder="Название набора">
             </div>
             <form id="add-card-form">
-                <textarea id="card-front" placeholder="Слово или термин" rows="1" required></textarea>
-                <textarea id="card-back" placeholder="Перевод или определение" rows="1" required></textarea>
+                <textarea id="card-front" placeholder="Лицевая сторона" rows="1" required></textarea>
+                <textarea id="card-back" placeholder="Задняя сторона" rows="1" required></textarea>
                 <div class="form-actions">
-                    <button type="submit" id="save-card-btn" class="btn btn-primary">Сохранить карточку</button>
-                    <button type="button" id="clear-form-btn" class="btn btn-secondary" style="display: none;">Новая карточка</button>
+                    <button type="submit" id="save-card-btn" class="btn btn-primary">Сохранить</button>
+                    <button type="button" id="clear-form-btn" class="btn btn-primary" style="display: none;">Отмена</button>
                 </div>
             </form>
             <div class="card-list-container">
