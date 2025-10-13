@@ -16,6 +16,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -186,6 +187,11 @@ h1, h2 {
     cursor: pointer;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s;
     text-align: center;
+}
+
+.btn:active {
+    transform: scale(0.95); /* Немного уменьшаем кнопку при нажатии */
+    opacity: 0.8;         /* Делаем её чуть более тусклой */
 }
 
 .btn-primary {
