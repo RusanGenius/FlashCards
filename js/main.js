@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function resetCardForm() {
         currentEditingCardId = null;
         addCardForm.reset();
-        saveCardBtn.textContent = 'Сохранить карточку';
+        saveCardBtn.textContent = 'Сохранить';
         clearFormBtn.style.display = 'none';
         autoResizeTextareas();
         cardFrontInput.focus();

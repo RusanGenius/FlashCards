@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const cardFront = document.getElementById('flashcard-front');
     const cardBack = document.getElementById('flashcard-back');
     const btnUnknown = document.getElementById('btn-unknown');
-    const btnFlip = document.getElementById('btn-flip');
     const btnKnown = document.getElementById('btn-known');
     const btnFinish = document.getElementById('btn-finish');
 
@@ -111,7 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     cardFlipper.addEventListener('click', () => cardFlipper.classList.toggle('is-flipped'));
-    btnFlip.addEventListener('click', () => cardFlipper.classList.toggle('is-flipped'));
     btnKnown.addEventListener('click', () => nextCard(true));
     btnUnknown.addEventListener('click', () => nextCard(false));
     btnFinish.addEventListener('click', endSession);
