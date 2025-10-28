@@ -9,6 +9,9 @@
     --accent-interactive: #303030;
     --glass-bg: rgba(10, 10, 10, 0.5); 
     --glass-border: rgba(255, 255, 255, 0.1);
+    --shadow-main: 0 0 25px rgba(255, 255, 255, 0.08);
+    --shadow-hover: 0 0 20px rgba(255, 255, 255, 0.12);
+    --shadow-btn: 0 0 15px rgba(255, 255, 255, 0.1);
 }
 
 /* --- 2. General Styles --- */
@@ -97,7 +100,7 @@ h1, h2 {
     border: 1px solid var(--glass-border);
     border-radius: 15px;
     backdrop-filter: blur(7px);
-    box-shadow: 0 0 32px 0 rgba(0, 0, 0, 0.37);
+    box-shadow: var(--shadow-main);
 }
 
 /* --- 6. Main Screen: Sets Grid --- */
@@ -137,7 +140,7 @@ h1, h2 {
 
 .set-tile:hover {
     transform: scale(1.05);
-    box-shadow: 0 0px 15px -10px rgb(0, 0, 0);
+    box-shadow: var(--shadow-hover);
 }
 
 /* --- 7. Main Screen: Tile Actions --- */
@@ -185,7 +188,7 @@ h1, h2 {
     font-size: 20px;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
     text-align: center;
 }
 
@@ -195,8 +198,10 @@ h1, h2 {
 }
 
 .btn-primary {
-    background-color: #aaa;
-    color: black;
+    background-color: transparent;
+    border-color: var(--glass-border);
+    color: var(--text-main);
+    box-shadow: var(--shadow-btn);
 }
 
 .btn-secondary {
@@ -207,11 +212,13 @@ h1, h2 {
 
 .btn-success-outline {
     background: var(--accent-success);
+    box-shadow: 0 0 10px rgba(80, 196, 45, 0.3);
     color: var(--bg-main);
 }
 
 .btn-danger-outline {
     background: var(--accent-danger);
+    box-shadow: 0 0 10px rgba(214, 21, 21, 0.3);
     color: var(--bg-main);
 }
 
@@ -521,6 +528,9 @@ body.light-theme {
     --accent-interactive: #f0f2f5;
     --accent-success: #34C759;
     --accent-danger: #FF3630;
+    --shadow-main: 0 0px 20px rgba(0, 0, 0, 0.2);
+    --shadow-hover: 0 0px 20px rgba(0, 0, 0, 0.25);
+    --shadow-btn: 0 0px 15px rgba(0, 0, 0, 0.25);
     background-color: var(--bg-main);
 }
 
@@ -530,7 +540,8 @@ body.light-theme::before {
 
 /* Light theme specific component overrides */
 body.light-theme .btn-primary {
-    background-color: #dedede;
+    background-color: transparent;
+    box-shadow: var(--shadow-btn);
     color: var(--text-main);
 }
 
@@ -540,7 +551,7 @@ body.light-theme .btn-secondary {
 
 body.light-theme .btn-success-outline,
 body.light-theme .btn-danger-outline {
-    color: black; 
+    color: white; 
 }
 
 body.light-theme .action-icon {
