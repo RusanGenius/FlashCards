@@ -1,7 +1,10 @@
+// Key for storing app data in localStorage
 const STORAGE_KEY = 'flashcards_app_data';
 
+// Generates a unique ID based on the current timestamp
 const _generateId = () => Date.now();
 
+// Creates a default data structure with some sample sets and cards
 function _createDefaultData() {
     return {
         sets: [
@@ -37,6 +40,7 @@ function _createDefaultData() {
     };
 }
 
+// Retrieves data from localStorage. If no data exists, it creates and saves default data.
 function _getData() {
     const data = localStorage.getItem(STORAGE_KEY);
     if (!data) {
@@ -47,18 +51,24 @@ function _getData() {
     return JSON.parse(data);
 }
 
+// Saves data to localStorage
 function _saveData(data) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
 }
 
+// --- Public API ---
+
+// Returns all sets
 export function getSets() {
     return _getData().sets;
 }
 
+// Returns a single set by its ID
 export function getSetById(setId) {
     return getSets().find(set => set.id === setId);
 }
 
+// Adds a new, empty set
 export function addSet(name) {
     const data = _getData();
     const newSet = {
@@ -71,12 +81,14 @@ export function addSet(name) {
     return newSet;
 }
 
+// Deletes a set by its ID
 export function deleteSet(setId) {
     let data = _getData();
     data.sets = data.sets.filter(set => set.id !== setId);
     _saveData(data);
 }
 
+// Updates the name of a set
 export function updateSetName(setId, newName) {
     const data = _getData();
     const set = data.sets.find(s => s.id === setId);
@@ -86,6 +98,7 @@ export function updateSetName(setId, newName) {
     }
 }
 
+// Adds a new card to a specific set
 export function addCardToSet(setId, cardData) {
     const data = _getData();
     const set = data.sets.find(s => s.id === setId);
@@ -100,6 +113,7 @@ export function addCardToSet(setId, cardData) {
     }
 }
 
+// Deletes a card from a specific set
 export function deleteCardFromSet(setId, cardId) {
     const data = _getData();
     const set = data.sets.find(s => s.id === setId);
@@ -109,6 +123,7 @@ export function deleteCardFromSet(setId, cardId) {
     }
 }
 
+// Updates the data of a card in a specific set
 export function updateCardInSet(setId, cardId, newCardData) {
     const data = _getData();
     const set = data.sets.find(s => s.id === setId);
