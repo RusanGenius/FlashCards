@@ -15,7 +15,7 @@ This is a web application for learning anything with flashcards. It allows users
 <div align="center">
 
 ## 📊 **Demonstration**
-![preview](preview.png)
+![preview](assets/preview.png)
 
 *Screenshots from a mobile device*
 
@@ -49,4 +49,7 @@ This is a web application for learning anything with flashcards. It allows users
     - `storage.js`: A module for working with `localStorage` (saving, loading, updating data).
     - `practice.js`: The logic for the practice page (displaying cards, tracking progress).
     - `results.js`: The logic for the results page.
+- 'assets/': The folder with sources files:
+    - 'icon.svg'
+    - 'preview.png'
 ```
