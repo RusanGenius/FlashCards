@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flash Cards</title>
-    <link rel="icon" type="image/svg+xml" href="icon.svg">
+    <link rel="icon" type="image/svg+xml" href="assets/icon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
@@ -25,8 +25,9 @@
 
     <div class="container practice-container">
         <header class="practice-header">
-            <a href="index.html" class="back-link">На главную</a>
+            <a href="index.html" class="back-link btn-header-action">На главную</a>
             <div id="progress-counter" class="progress-counter">0/0</div>
+            <button id="btn-finish" class="btn-finish btn-header-action">Завершить</button>
         </header>
 
         <main class="practice-area">
@@ -39,10 +40,6 @@
                 <button id="btn-known" class="btn btn-success-outline">Знаю</button>
             </div>
         </main>
-
-        <footer class="practice-controls">
-            <button id="btn-finish" class="btn-finish">Завершить</button>
-        </footer>
         
     </div>
 
