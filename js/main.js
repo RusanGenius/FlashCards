@@ -181,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Apply saved layout
         const savedLayout = localStorage.getItem('flashcards-layout');
-        if (savedLayout === 'list') {
+        if (savedLayout === 'list' && window.innerWidth > 768) {
             setsGrid.classList.add('list-view');
             layoutToggleBtn.classList.add('is-list-view');
         }
@@ -271,6 +271,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Initialize the app
     initialize();
 });

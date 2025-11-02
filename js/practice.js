@@ -129,6 +129,5 @@ document.addEventListener('DOMContentLoaded', () => {
     btnUnknown.addEventListener('click', () => nextCard(false));
     btnFinish.addEventListener('click', endSession);
     
-    // Load cards when the page is ready
     loadCards();
 });

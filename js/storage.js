@@ -10,12 +10,12 @@ function _createDefaultData() {
         sets: [
             {
                 id: _generateId(),
-                name: "Ключевые даты в истории России",
+                name: "Даты по истории",
                 cards: [
-                    { id: _generateId() + 1, front: 'Крещение Руси', back: '988 год' },
-                    { id: _generateId() + 2, front: 'Ледовое побоище', back: '1242 год' },
-                    { id: _generateId() + 3, front: 'Стояние на реке Угре', back: '1480 год' },
-                    { id: _generateId() + 4, front: 'Основание Санкт-Петербурга', back: '1703 год' },
+                    { id: _generateId() + 1, front: 'Первая мировая война', back: '1914 - 1918 гг' },
+                    { id: _generateId() + 2, front: 'Выход Германии из лиги наций', back: '1933 год' },
+                    { id: _generateId() + 3, front: 'Гражданская война в Испании', back: '1936 - 1939 гг' },
+                    { id: _generateId() + 4, front: 'Япония захватила Северо-восточный Китай (Маньчжурию)', back: '1931 - 1932 гг' },
                     { id: _generateId() + 5, front: 'Бородинское сражение', back: '1812 год' },
                     { id: _generateId() + 6, front: 'Отмена крепостного права', back: '1861 год' },
                     { id: _generateId() + 7, front: 'Октябрьская революция', back: '1917 год' },
@@ -26,14 +26,14 @@ function _createDefaultData() {
                 id: _generateId() + 10,
                 name: "Английские слова",
                 cards: [
-                    { id: _generateId() + 11, front: 'Experience', back: 'Опыт' },
-                    { id: _generateId() + 12, front: 'Inevitable', back: 'Неизбежный' },
+                    { id: _generateId() + 11, front: 'Experience', back: 'Опыт' },  
+                    { id: _generateId() + 12, front: 'Advice', back: 'Совет' },
                     { id: _generateId() + 13, front: 'Curious', back: 'Любопытный' },
-                    { id: _generateId() + 14, front: 'To distinguish', back: 'Различать, отличать' },
+                    { id: _generateId() + 14, front: 'To distract', back: 'Отвлекать' },
                     { id: _generateId() + 15, front: 'To persuade', back: 'Убеждать' },
                     { id: _generateId() + 16, front: 'To acknowledge', back: 'Признавать, подтверждать' },
-                    { id: _generateId() + 17, front: 'Subtle', back: 'Тонкий, неуловимый' },
-                    { id: _generateId() + 18, front: 'Diligent', back: 'Старательный, прилежный' }
+                    { id: _generateId() + 17, front: 'To earn', back: 'Зарабатывать' },
+                    { id: _generateId() + 18, front: 'Black pencil', back: 'Чёрный карандаш' }
                 ]
             }
         ]
