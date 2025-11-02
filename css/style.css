@@ -1,17 +1,17 @@
 /* --- 1. Variables & Colors --- */
 :root {
-    --bg-main: #080808;
+    --bg-main: #09090B;
     --text-main: #C9D1D9;
     --text-secondary: #8B949E;
     --white: #FFFFFF;
     --accent-success: #50c42d;
     --accent-danger: #d61515;
-    --accent-interactive: #303030;
-    --glass-bg: rgba(10, 10, 10, 0.5); 
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --shadow-main: 0 0 25px rgba(255, 255, 255, 0.08);
-    --shadow-hover: 0 0 20px rgba(255, 255, 255, 0.12);
-    --shadow-btn: 0 0 15px rgba(255, 255, 255, 0.1);
+    --accent-interactive: #18181A;
+    --glass-bg: #18181A; 
+    --glass-border: transparent;
+    --shadow-main: none;
+    --shadow-hover: none;
+    --shadow-btn: none;
 }
 
 /* --- 2. General Styles --- */
@@ -23,34 +23,13 @@
 }
 
 body {
-    background-color: #000;
+    background-color: var(--bg-main);
     color: var(--text-main);
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     line-height: 1.5;
     position: relative;
     overflow-x: hidden;
-}
-
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -1;
-    background: white;
-    filter: url(#noise);
-
-    mask-image: 
-        radial-gradient(circle at 50% 100%, white, transparent 50%),
-        radial-gradient(circle at 90% 10%, white, transparent 35%),
-        radial-gradient(circle at 15% 40%, white, transparent 30%);
-    -webkit-mask-image: 
-        radial-gradient(circle at 30% 100%, rgba(255, 255, 255, 0.6), transparent 45%),
-        radial-gradient(circle at 70% 40%, rgba(255, 255, 255, 0.4), transparent 25%),
-        radial-gradient(circle at 55% 60%, rgba(255, 255, 255, 0.2), transparent 40%);
 }
 
 /* --- 3. Scrollbar --- */
@@ -98,7 +77,7 @@ h1, h2 {
 .glass-effect {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
-    border-radius: 15px;
+    border-radius: 25px;
     backdrop-filter: blur(7px);
     box-shadow: var(--shadow-main);
 }
@@ -127,6 +106,11 @@ h1, h2 {
     overflow: hidden;
 }
 
+.set-tile:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-hover);
+}
+
 /* Truncate text to 3 lines */
 .set-tile-name {
     display: -webkit-box;
@@ -136,11 +120,6 @@ h1, h2 {
     text-overflow: ellipsis;
     word-break: break-word;
     transition: transform 0.2s ease-in-out;
-}
-
-.set-tile:hover {
-    transform: scale(1.05);
-    box-shadow: var(--shadow-hover);
 }
 
 /* --- 7. Main Screen: Tile Actions --- */
@@ -193,12 +172,12 @@ h1, h2 {
 }
 
 .btn:active {
-    transform: scale(0.95); /* Немного уменьшаем кнопку при нажатии */
-    opacity: 0.8;         /* Делаем её чуть более тусклой */
+    transform: scale(0.95);
+    opacity: 0.8;
 }
 
 .btn-primary {
-    background-color: transparent;
+    background-color: var(--bg-main);
     border-color: var(--glass-border);
     color: var(--text-main);
     box-shadow: var(--shadow-btn);
@@ -210,16 +189,16 @@ h1, h2 {
     color: var(--bg-main);
 }
 
+.btn-success-outline, .btn-danger-outline {
+    color: var(--bg-main);
+}
+
 .btn-success-outline {
     background: var(--accent-success);
-    box-shadow: 0 0 10px rgba(80, 196, 45, 0.3);
-    color: var(--bg-main);
 }
 
 .btn-danger-outline {
     background: var(--accent-danger);
-    box-shadow: 0 0 10px rgba(214, 21, 21, 0.3);
-    color: var(--bg-main);
 }
 
 .btn.large {
@@ -227,7 +206,7 @@ h1, h2 {
     border-radius: 30px;
 }
 
-/* --- 9. Modals (Base) --- */
+/* --- 9. Modals --- */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -266,7 +245,6 @@ h1, h2 {
     line-height: 1;
 }
 
-/* --- 10. Modals: Create & Edit --- */
 #create-set-form {
     text-align: center;
 }
@@ -301,6 +279,7 @@ input[type="text"], textarea {
     resize: none;
     line-height: 1.5;
 }
+
 textarea {
     overflow: hidden;
     min-height: calc(1.5em + 26px);
@@ -353,7 +332,7 @@ textarea {
     padding-left: 10px;
 }
 
-/* --- 11. Practice Page --- */
+/* --- 10. Practice Page --- */
 .practice-container {
     display: flex;
     flex-direction: column;
@@ -361,14 +340,24 @@ textarea {
 }
 .practice-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     width: 100%;
+    gap: 14px;
 }
-.back-link {
-    color: var(--text-secondary);
+
+.btn-header-action {
+    background-color: #18181A;
+    padding: 10px 14px;
+    border-radius: 30px;
     text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    font-family: inherit;
+    color: var(--text-main);
 }
+
 .practice-area {
     flex-grow: 1;
     display: flex;
@@ -404,6 +393,8 @@ textarea {
     white-space: pre-wrap;
     overflow-y: auto;
     word-wrap: break-word;
+    color: #ffffff;
+    
 }
 #flashcard-back {
     transform: rotateY(180deg);
@@ -416,21 +407,8 @@ textarea {
     margin-top: 30px;
     flex-wrap: wrap;
 }
-.practice-controls {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    padding-top: 20px;
-}
-.btn-finish {
-    background: transparent;
-    border: none;
-    color: var(--text-secondary);
-    font-size: 24px;
-    cursor: pointer;
-}
 
-/* --- 12. Results Page --- */
+/* --- 11. Results Page --- */
 .results-container {
     display: flex;
     justify-content: center;
@@ -443,6 +421,10 @@ textarea {
     width: 100%;
     max-width: 600px;
 }
+.results-content h2 {
+    color: #FFFFFF; /* <-- Замените на желаемый цвет */
+    font-size: 25px;  /* <-- Укажите желаемый размер шрифта */
+}
 .results-content p {
     font-size: 18px;
     margin: 20px 0;
@@ -452,6 +434,12 @@ textarea {
     flex-direction: column;
     gap: 15px;
     margin-top: 30px;
+}
+
+.results-actions .btn {
+    font-weight: 100;
+    font-size: 18px;
+    color: var(--text-main);;
 }
 
 .results-actions-row {
@@ -484,23 +472,31 @@ textarea {
     background-color: var(--accent-danger);
 }
 
-/* --- 13. Main Screen Layout --- */
+/* --- 12. Main Screen Layout --- */
 .main-layout {
     display: flex;
     flex-direction: column;
+    align-items: center;
+}
+
+.main-controls-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 20px;
 }
 
 .main-controls {
     display: flex;
     justify-content: center;
     gap: 20px;
-    padding: 0 20px 20px 20px;
+    padding: 0 20px;
 }
 
 .control-btn {
-    width: 70px;
-    height: 70px;
-    border-radius: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -516,9 +512,7 @@ textarea {
     fill: currentColor;
 }
 
-/* --- 14. Theme Toggle (Light/Dark) --- */
-
-/* Define light theme variables and override styles */
+/* --- 13. Theme Toggle (Light/Dark) --- */
 body.light-theme {
     --bg-main: rgba(255, 255, 255, 0.5);
     --text-main: #1C1E21;
@@ -538,7 +532,6 @@ body.light-theme::before {
     display: none;
 }
 
-/* Light theme specific component overrides */
 body.light-theme .btn-primary {
     background-color: transparent;
     box-shadow: var(--shadow-btn);
@@ -562,7 +555,12 @@ body.light-theme .delete-card-btn {
     color: black;
 }
 
-/* Theme icon visibility toggle */
+body.light-theme .btn-header-action {
+    background-color: var(--white);
+    color: var(--text-main);
+    box-shadow: var(--shadow-btn);
+}
+
 .icon-moon,
 body.light-theme .icon-sun {
     display: none;
@@ -571,7 +569,7 @@ body.light-theme .icon-moon {
     display: block;
 }
 
-/* --- 15. View Toggle (Grid/List) --- */
+/* --- 14. View Toggle (Grid/List) --- */
 #layout-toggle-btn .icon-grid {
     display: none;
 }
@@ -613,33 +611,88 @@ body.light-theme .icon-moon {
     transform: none;
 }
 
-/* --- 16. Desktop Responsiveness --- */
-@media (min-width: 768px) {
-    .main-layout {
-        flex-direction: row;
-        gap: 40px;
-        padding: 0 20px;
-    }
-    .main-controls {
-        flex-direction: column;
-        justify-content: flex-start;
-        padding: 0;
-        padding-top: 105px;
-        gap: 15px;
-    }
-    .main-header h1 {
-        text-align: center;
-        padding-left: 0;
-    }
+#telegram-link-btn {
+    display: none;
+}
+
+/* --- 15. Media Queries for Mobile --- */
+@media (max-width: 768px) {
     .sets-grid {
-        flex: 1;
-        justify-content: center;
+        padding: 0 30px;
     }
+
+    .set-tile {
+        width: 100%;
+        height: auto;
+        min-height: 180px;
+    }
+
+    #layout-toggle-btn {
+        display: none;
+    }
+
+    #telegram-link-btn {
+        display: flex;
+    }
+
     .sets-grid.list-view {
-        align-items: center;
-        padding: 0;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 25px;
     }
+
     .sets-grid.list-view .set-tile {
-        max-width: 1050px;
+        width: 100%;
+        max-width: none;
+        height: auto;
+        min-height: 130px;
+        flex-direction: column;
+        justify-content: center;
+        padding: 15px;
+    }
+
+    .sets-grid.list-view .set-tile-name {
+        text-align: center;
+    }
+
+    .sets-grid.list-view .set-tile-actions {
+        position: absolute;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .sets-grid.list-view .set-tile.actions-visible .set-tile-name {
+        transform: translateY(-15px);
+    }
+
+    .main-controls {
+        background: #18181A;
+        border-radius: 45px;
+        padding: 10px;
+        gap: 20px;
+    }
+
+    .control-btn {
+        background: #09090B;
+    }
+
+    body.light-theme .main-controls {
+        background: var(--white);
+        box-shadow: var(--shadow-main);
+    }
+
+    body.light-theme .control-btn {
+        background: var(--white);
+        color: var(--text-main);
+        box-shadow: inset 0 2px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .set-tile:hover {
+        transform: none;
+        box-shadow: var(--shadow-main);
+    }
+
+    .set-tile:active {
+        transform: none;
     }
 }
