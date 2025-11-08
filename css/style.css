@@ -393,7 +393,7 @@ textarea {
     white-space: pre-wrap;
     overflow-y: auto;
     word-wrap: break-word;
-    color: #ffffff;
+    color: var(--text-main);
     
 }
 #flashcard-back {
@@ -422,8 +422,8 @@ textarea {
     max-width: 600px;
 }
 .results-content h2 {
-    color: #FFFFFF; /* <-- Замените на желаемый цвет */
-    font-size: 25px;  /* <-- Укажите желаемый размер шрифта */
+    color: #FFFFFF;
+    font-size: 25px;
 }
 .results-content p {
     font-size: 18px;
